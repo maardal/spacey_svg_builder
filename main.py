@@ -28,13 +28,15 @@ class Viewer:
                 self.y = 0
 
 #Class to more easily increase the size of the produced SVG.
-class Proportions:     
+class Size:     
         def __init__(self, fontSize, charLength, charheightOffset, charLengthOffset, svgWidth):
             self.fontSize = fontSize
             self.charLength = charLength
             self.charHeightOffset = charheightOffset
             self.charLenghtOffset = charLengthOffset
             self.svgWidth = svgWidth
+            self.roleIconWidth = 12
+            self.roleIconHeight = 10
 
         def multiply(self, number):
             self.fontSize *= number
@@ -42,6 +44,8 @@ class Proportions:
             self.charHeightOffset *= number
             self.charLenghtOffset *= number
             self.svgWidth *= number
+            self.roleIconWidth *= number 
+            self.roleIconHeight *= number
 
 
 #variables for setting the size of elements and SVG.
@@ -49,11 +53,11 @@ baseFontSize = 16
 baseFontCharLength = 10
 baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
 baseCharLengthOffset = 0
-baseImageWidth = 400
+baseImageWidth = 800
 svgHeight = 0 #svgHeight is determined by the amount of names. 
 
-proportions = Proportions(baseFontSize, baseFontCharLength, baseCharHeightOffset, baseCharLengthOffset, baseImageWidth)
-proportions.multiply(2)
+size = Size(baseFontSize, baseFontCharLength, baseCharHeightOffset, baseCharLengthOffset, baseImageWidth)
+size.multiply(2)
 
 
 # importing the list of viewers
@@ -79,7 +83,7 @@ with open('viewers.csv', newline="") as csvfile:
 
 sorted_list = []
 temp_remove_array=[]
-temp_max_x = proportions.svgWidth
+temp_max_x = size.svgWidth
 temp_x = 0
 
 while len(viewers) > 0:
@@ -88,7 +92,9 @@ while len(viewers) > 0:
                 break
 
             temp_viewer = viewers[j]
-            calulatedNamePixelLength = math.ceil(len(temp_viewer.name) * proportions.charLength) + proportions.charLenghtOffset
+            calulatedNamePixelLength = math.ceil(len(temp_viewer.name) * size.charLength) + size.charLenghtOffset
+            if temp_viewer.role == "vip" or temp_viewer.role == "mod":
+                  calulatedNamePixelLength += size.roleIconWidth
             
             if calulatedNamePixelLength <= temp_max_x:
                 temp_viewer.x = temp_x
@@ -107,15 +113,22 @@ while len(viewers) > 0:
         viewers.pop(viewer_list_index)
 
     temp_remove_array.clear()
-    temp_max_x = proportions.svgWidth
+    temp_max_x = size.svgWidth
     temp_x = 0
-    svgHeight += proportions.charHeightOffset
+    svgHeight += size.charHeightOffset
 
 # build the svg.
-names = et.Element('svg', width=str(proportions.svgWidth), height=str(svgHeight), version='1.1', xmlns='http://www.w3.org/2000/svg', viewBox=f'0 -{proportions.fontSize} {proportions.svgWidth} {svgHeight}')
+names = et.Element('svg', width=str(size.svgWidth), height=str(svgHeight), version='1.1', xmlns='http://www.w3.org/2000/svg', viewBox=f'0 -{size.fontSize} {size.svgWidth} {svgHeight}')
 
 for viewer in sorted_list:
-      text = et.Element("text", x=str(viewer.x), y=str(viewer.y), fill=str(viewer.color), style=f'font-family:Consolas; font-size:{proportions.fontSize}px')
+      viewer_x_position = viewer.x
+      if viewer.role == "vip":
+            names.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="diamond.svg"))
+            viewer_x_position += size.roleIconWidth
+      if viewer.role == "mod":
+            names.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="sword.svg"))
+            viewer_x_position += size.roleIconWidth
+      text = et.Element("text", x=str(viewer_x_position), y=str(viewer.y), fill=str(viewer.color), style=f'font-family:Consolas; font-size:{size.fontSize}px')
       text.text = viewer.name
       names.append(text)
 
