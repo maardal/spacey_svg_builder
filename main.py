@@ -65,9 +65,11 @@ viewers=[]
 
 with open('viewers.csv', newline="") as csvfile:
         viewer_list = csv.reader(csvfile, delimiter=',', quotechar='|')
-        for name, color, role in viewer_list:
-            if name != "" :
-                viewers.append(Viewer(name.strip(), color.strip(), role.strip()))
+        for name, color, nickname, role in viewer_list:
+            if name != "":
+                viewers.append(Viewer(nickname.strip() if nickname != "" else name.strip()
+                                      , color.strip()
+                                      , role.strip().lower()))
 
 
 """ 
@@ -118,21 +120,22 @@ while len(viewers) > 0:
     svgHeight += size.charHeightOffset
 
 # build the svg.
-names = et.Element('svg', width=str(size.svgWidth), height=str(svgHeight), version='1.1', xmlns='http://www.w3.org/2000/svg', viewBox=f'0 -{size.fontSize} {size.svgWidth} {svgHeight}')
+svg = et.Element('svg', width=str(size.svgWidth), height=str(svgHeight + 10), version='1.1', xmlns='http://www.w3.org/2000/svg', viewBox=f'0 -{size.fontSize} {size.svgWidth} {svgHeight}')
+
 
 for viewer in sorted_list:
       viewer_x_position = viewer.x
-      if viewer.role == "vip":
-            names.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="diamond.svg"))
+      if viewer.role.lower() == "vip":
+            svg.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="badges/diamond.svg"))
             viewer_x_position += size.roleIconWidth
-      if viewer.role == "mod":
-            names.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="sword.svg"))
+      if viewer.role.lower() == "mod":
+            svg.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="badges/sword.svg"))
             viewer_x_position += size.roleIconWidth
       text = et.Element("text", x=str(viewer_x_position), y=str(viewer.y), fill=str(viewer.color), style=f'font-family:Consolas; font-size:{size.fontSize}px')
       text.text = viewer.name
-      names.append(text)
+      svg.append(text)
 
 #open file and save
 f = open("sample.svg", "wb")
-f.write(et.tostring(names))
+f.write(et.tostring(svg))
 f.close()
