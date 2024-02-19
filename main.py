@@ -1,14 +1,22 @@
 #!/usr/bin/env python
 
-# This script is used to build a SVG from a csv list of names.
+# This script is used to build a SVG from a csv list of twitch usernames.
 # The svg will be a square of size x,y, and the names will be placed
-# sequntially row by row.
+# sequntially row by row, illustrated as below.
 # 
 # |----------------x
 # |creatin msvosch x
 # |jon stranger    x
 # |verylongnameeee x
 # |----------------x
+#
+# csv must have username. Color, nickname, and role are optional.
+# If no color set, the color of the name is defaulted to black.
+# Colors can be given as a name or as a hex code. If given as a name, they must be a amongst the
+# 140 supported by browsers. If not recognized, the color is defaulted to blakc.
+# Nickname takes presedence over username if added.
+# Roles supported are mod and vip. Usernames with mod get the mod sword beside their name,
+# while usernames with vip get the vip diamond.
 # 
 # The font-family has to be monospaced, i.e. where alle characters
 # have the same length.
@@ -21,7 +29,9 @@ from datetime import datetime
 from xml.etree import ElementTree as et
 
 #Helper classes
-#Class for visual representation of a viewer's name in a list
+
+## Class for visual representation of a viewer's name in a list.
+
 class Viewer:
         def __init__(self, name, color, role):
                 self.name = name.upper()
@@ -30,8 +40,8 @@ class Viewer:
                 self.x = 0
                 self.y = 0
 
-#Class to more easily increase the size of the produced SVG.
-class Size:     
+## Class to more easily increase the size of the produced SVG.
+                
         def __init__(self, fontSize, charLength, charheightOffset, charLengthOffset, svgWidth):
             self.fontSize = fontSize
             self.charLength = charLength
@@ -51,19 +61,8 @@ class Size:
             self.roleIconHeight *= number
 
 
-#variables for setting the size of elements and SVG.
-baseFontSize = 16
-baseFontCharLength = 10
-baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
-baseCharLengthOffset = 0
-baseImageWidth = 800
-svgHeight = 0 #svgHeight is determined by the amount of names. 
-
-size = Size(baseFontSize, baseFontCharLength, baseCharHeightOffset, baseCharLengthOffset, baseImageWidth)
-size.multiply(2)
-
-
-# importing the list of viewers
+# Importing the list of viewers
+            
 viewers=[]
 
 with open('viewers.csv', newline="") as csvfile:
@@ -74,17 +73,20 @@ with open('viewers.csv', newline="") as csvfile:
                                       , color.strip()
                                       , role.strip().lower()))
 
+# Base sizes of elements and SVG.
 
-""" 
-    We want the names to fill a row as best possible, without overflowing
-    the max width of the svg. If a name will overflow the max width we
-    will not add that to the list of sorted viewers, but rather hold off
-    and check if the next names fit. 
+baseFontSize = 16
+baseFontCharLength = 10
+baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
+baseCharLengthOffset = 0
+baseImageWidth = 800
+svgHeight = 0 #svgHeight is determined by the amount of names. 
 
-    the loop adds a x value and a y value to a viewer. x relates to a
-    names starting position in the svg in the horizontal direction.
-    y is the end position in the vertical direction.
-"""
+# Resize svg
+
+
+# Calculate coordinates for names. Will not let names overflow the width of the svg.
+# Also sorts list name, so spaces at the end of a line will be filled by the first possible name that is short enough.
 
 sorted_list = []
 temp_remove_array=[]
@@ -122,9 +124,13 @@ while len(viewers) > 0:
     temp_x = 0
     svgHeight += size.charHeightOffset
 
-# build the svg.
+
+# Build svg.
+    
 svg = et.Element('svg', width=str(size.svgWidth), height=str(svgHeight + 10), version='1.1', xmlns='http://www.w3.org/2000/svg', viewBox=f'0 -{size.fontSize} {size.svgWidth} {svgHeight}')
 
+
+## Place names in svg based on coordinates.
 
 for viewer in sorted_list:
       viewer_x_position = viewer.x
