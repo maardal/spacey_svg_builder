@@ -33,8 +33,8 @@ from xml.etree import ElementTree as et
 ## Class for visual representation of a viewer's name in a list.
 
 class Viewer:
-        def __init__(self, name, color, role):
-                self.name = name.upper()
+        def __init__(self, displayName, color, role):
+                self.displayName = displayName.upper()
                 self.color = color
                 self.role = role
                 self.x = 0
@@ -99,19 +99,19 @@ while len(viewers) > 0:
                 break
 
             temp_viewer = viewers[j]
-            calulatedNamePixelLength = math.ceil(len(temp_viewer.name) * size.charLength) + size.charLenghtOffset
+            calulatedPixelLengthName = math.ceil(len(temp_viewer.displayName) * size.charLength) + size.charLenghtOffset
             if temp_viewer.role == "vip" or temp_viewer.role == "mod":
-                  calulatedNamePixelLength += size.roleIconWidth
+                  calulatedPixelLengthName += size.roleIconWidth
             
-            if calulatedNamePixelLength <= temp_max_x:
+            if calulatedPixelLengthName <= temp_max_x:
                 temp_viewer.x = temp_x
                 temp_viewer.y = svgHeight
-                temp_x = temp_x + calulatedNamePixelLength
+                temp_x = temp_x + calulatedPixelLengthName
 
                 sorted_list.append(temp_viewer)
                 temp_remove_array.append(j)
 
-                temp_max_x = temp_max_x - calulatedNamePixelLength
+                temp_max_x = temp_max_x - calulatedPixelLengthName
 
     temp_remove_array_copy = temp_remove_array.copy()
     temp_remove_array_copy.reverse()
@@ -140,8 +140,7 @@ for viewer in sorted_list:
       if viewer.role.lower() == "mod":
             svg.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="badges/sword.svg"))
             viewer_x_position += size.roleIconWidth
-      text = et.Element("text", x=str(viewer_x_position), y=str(viewer.y), fill=str(viewer.color), style=f'font-family:Consolas; font-size:{size.fontSize}px')
-      text.text = viewer.name
+      text.text = viewer.displayName
       svg.append(text)
 
 currentDateTime = datetime.now().strftime("-%Y%m%d-%H%M%S")
