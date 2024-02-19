@@ -12,9 +12,12 @@
 # 
 # The font-family has to be monospaced, i.e. where alle characters
 # have the same length.
+#
+# Script saves the files with a timestamp on the format yyyy-mm-dd-hr-mm-ss. 
 
 import math
 import csv
+from datetime import datetime
 from xml.etree import ElementTree as et
 
 #Helper classes
@@ -135,7 +138,8 @@ for viewer in sorted_list:
       text.text = viewer.name
       svg.append(text)
 
-#open file and save
-f = open("sample.svg", "wb")
+currentDateTime = datetime.now().strftime("-%Y%m%d-%H%M%S")
+
+f = open(f"sample{currentDateTime}.svg", "wb")
 f.write(et.tostring(svg))
 f.close()
