@@ -42,6 +42,11 @@ class Viewer:
 
 ## Class to more easily increase the size of the produced SVG.
                 
+class Size:
+        
+        iconWidth = 12
+        iconHeight = 10
+
         def __init__(self, fontSize, charLength, charheightOffset, charLengthOffset, svgWidth):
             self.fontSize = fontSize
             self.charLength = charLength
@@ -75,6 +80,7 @@ with open('viewers.csv', newline="") as csvfile:
 
 # Base sizes of elements and SVG.
 
+monospacedFont = "Consolas"
 baseFontSize = 16
 baseFontCharLength = 10
 baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
@@ -84,6 +90,9 @@ svgHeight = 0 #svgHeight is determined by the amount of names.
 
 # Resize svg
 
+size = Size(baseFontSize, baseFontCharLength, baseCharHeightOffset, baseCharLengthOffset, baseImageWidth)
+multiplicationFactor = 2
+size.multiply(multiplicationFactor)
 
 # Calculate coordinates for names. Will not let names overflow the width of the svg.
 # Also sorts list name, so spaces at the end of a line will be filled by the first possible name that is short enough.
@@ -129,19 +138,59 @@ while len(viewers) > 0:
     
 svg = et.Element('svg', width=str(size.svgWidth), height=str(svgHeight + 10), version='1.1', xmlns='http://www.w3.org/2000/svg', viewBox=f'0 -{size.fontSize} {size.svgWidth} {svgHeight}')
 
+defs = et.Element('defs')
+
+iconWidth = Size.iconWidth * multiplicationFactor
+iconHeight = Size.iconHeight * multiplicationFactor
+
+## vip_badge_coordinates - a diamond          
+diamond_left_middle = f'{0} {iconHeight * 0.26}'
+diamond_left_top = f'{iconWidth * 0.1875} {0}'
+diamond_right_top = f'{iconWidth * 0.8125} {0}'
+diamond_right_middle = f'{iconWidth} {iconHeight * 0.26}'
+diamond_bottom_tip = f'{iconWidth/2} {iconHeight}'
+
+vip_pattern_definition = et.SubElement(defs, "pattern", id="vip_badge", x="0", y="0", width=str(iconWidth), height=str(iconHeight), patternUnits="objectBoundingBox")
+vip_pattern_geometry = et.SubElement(vip_pattern_definition, "polygon", fill="#fb0493", points=f'{diamond_left_middle}, {diamond_left_top}, {diamond_right_top}, {diamond_right_middle}, {diamond_bottom_tip}')
+
+## mod_badge_coordinates - a sword                
+grip_bottom_left = f'{0} {iconHeight * 0.875}'
+grip_upper_left = f'{iconWidth * 0.125} {iconHeight * 0.6875}'
+guard_bottom_left = f'{0} {iconHeight * 0.5625}'
+guard_upper_left = f'{iconWidth * 0.125} {iconHeight * 0.4375}'
+blade_base_left = f'{iconWidth * 0.275} {iconHeight * 0.55}'
+blade_point_left = f'{iconWidth * 0.75} {0}'
+blade_point_middle = f'{iconWidth} {0}'
+blade_point_right = f'{iconWidth} {iconHeight * 0.25}'
+blade_base_right = f'{iconWidth * 0.4375} {iconHeight * 0.6875}'
+guard_upper_right = f'{iconWidth * 0.625} {iconHeight * 0.875}'
+guard_bottom_right = f'{iconWidth * 0.5} {iconHeight}'
+grip_upper_right = f'{iconWidth * 0.275} {iconHeight * 0.875}'
+grip_bottom_right = f'{iconWidth * 0.125} {iconHeight}'
+
+mod_pattern_definition = et.SubElement(defs, "pattern", id="mod_badge", x="0", y="0", width=str(iconWidth), height=str(iconHeight), patternUnits="objectBoundingBox")
+mod_pattern_geometry = et.SubElement(mod_pattern_definition, "polygon", fill="#14cb04", points=f'{grip_bottom_left}, {grip_upper_left}, {guard_bottom_left}, {guard_upper_left}, {blade_base_left}, {blade_point_left}, {blade_point_middle}, {blade_point_right}, {blade_base_right}, {guard_upper_right}, {guard_bottom_right}, {grip_upper_right}, {grip_bottom_right}')
+
+svg.append(defs)
 
 ## Place names in svg based on coordinates.
 
 for viewer in sorted_list:
       viewer_x_position = viewer.x
+
       if viewer.role.lower() == "vip":
-            svg.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="badges/diamond.svg"))
+            svg.append(et.Element('rect', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(iconWidth), height=str(iconHeight), fill="url(#vip_badge)"))
             viewer_x_position += size.roleIconWidth
+
       if viewer.role.lower() == "mod":
-            svg.append(et.Element('image', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(size.roleIconWidth), height=str(size.roleIconHeight), href="badges/sword.svg"))
+            svg.append(et.Element('rect', x=str(viewer_x_position), y=str(viewer.y - 20), width=str(iconWidth), height=str(iconHeight), fill="url(#mod_badge)"))
             viewer_x_position += size.roleIconWidth
+
+      text = et.Element("text", x=str(viewer_x_position), y=str(viewer.y), fill=str(viewer.color), style=f'font-family:{monospacedFont}; font-size:{size.fontSize}px')
       text.text = viewer.displayName
       svg.append(text)
+
+et.indent(svg, '  ')
 
 currentDateTime = datetime.now().strftime("-%Y%m%d-%H%M%S")
 
