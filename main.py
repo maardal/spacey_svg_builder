@@ -87,6 +87,9 @@ except OSError as error:
       print(error.__class__)
       print(error)
       SystemExit("Could not open and/or read file. File must be csv file in the supported format. See https://github.com/maardal/spacey_svg_builder")
+except Exception as execption:
+      print(execption.__class__)
+      SystemExit("Unexpected error. Report error at https://github.com/maardal/spacey_svg_builder")
 finally:
       csvfile.close()
 
