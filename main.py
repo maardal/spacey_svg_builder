@@ -26,6 +26,7 @@
 import math
 import csv
 from datetime import datetime
+import sys
 from xml.etree import ElementTree as et
 
 #Helper classes
@@ -70,13 +71,24 @@ class Size:
             
 viewers=[]
 
-with open('viewers.csv', newline="") as csvfile:
-        viewer_list = csv.reader(csvfile, delimiter=',', quotechar='|')
-        for name, color, nickname, role in viewer_list:
-            if name != "":
-                viewers.append(Viewer(nickname.strip() if nickname != "" else name.strip()
-                                      , color.strip()
-                                      , role.strip().lower()))
+try:
+    with open('viewers_sheets_data.exe', newline="") as csvfile:
+            viewer_list = csv.reader(csvfile, delimiter=',', quotechar='|')
+            for name, color, nickname, role in viewer_list:
+                if name != "":
+                    viewers.append(Viewer(nickname.strip() if nickname != "" else name.strip()
+                                          , color.strip()
+                                          , role.strip().lower()))
+except FileNotFoundError as error:
+      print(error.__class__)                    #REMOVE LATER
+      print(error)                              #REMOVE LATER
+      SystemExit("Please provide a file.")      #CHANGE TO INCLUDE SUPPLIED PATH/FILE NAME
+except OSError as error:
+      print(error.__class__)
+      print(error)
+      SystemExit("Could not open and/or read file. File must be csv file in the supported format. See https://github.com/maardal/spacey_svg_builder")
+finally:
+      csvfile.close()
 
 # Base sizes of elements and SVG.
 
