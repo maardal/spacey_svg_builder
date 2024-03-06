@@ -23,6 +23,7 @@
 #
 # Script saves the files with a timestamp on the format yyyy-mm-dd-hr-mm-ss. 
 
+import pathlib
 import math
 import csv
 from datetime import datetime
@@ -67,31 +68,72 @@ class Size:
             self.roleIconHeight *= number
 
 
-# Importing the list of viewers
-            
-viewers=[]
+# Reading command line arguments.
+
+USAGE = f"Usage: python {sys.argv[0]} [--help] | <path_to_csv_file>"
+
+if len(sys.argv) == 1:
+    print("No file supplied.")
+    raise SystemExit(USAGE)
+
+path = pathlib.Path(sys.argv[1])
+
+if str(path).lower() == "--help" or str(path).lower() == "-h":
+    print(USAGE)
+    print("\nCreates a list of Twitch usernames on a SVG format, based on CSV file.")
+    print(
+        "See https://github.com/maardal/spacey_svg_builder on requirements for CSV file."
+    )
+    print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
+    print()
+    raise SystemExit()
+
+elif path.suffix.lower() != ".csv":
+    print("File format needs to be CSV.")
+    raise SystemExit(USAGE)
+
+# Importing the list of viewers.
+
+viewers = []
 
 try:
-    with open('viewers_sheets_data.exe', newline="") as csvfile:
-            viewer_list = csv.reader(csvfile, delimiter=',', quotechar='|')
-            for name, color, nickname, role in viewer_list:
-                if name != "":
-                    viewers.append(Viewer(nickname.strip() if nickname != "" else name.strip()
-                                          , color.strip()
-                                          , role.strip().lower()))
+    with open(path, newline="") as csvfile:
+        viewer_list = csv.reader(csvfile, delimiter=",", quotechar="|")
+        for name, color, nickname, role in viewer_list:
+            if name != "":
+                viewers.append(
+                    Viewer(
+                        nickname.strip() if nickname != "" else name.strip(),
+                        color.strip(),
+                        role.strip().lower(),
+                    )
+                )
+
 except FileNotFoundError as error:
-      print(error.__class__)                    #REMOVE LATER
-      print(error)                              #REMOVE LATER
-      SystemExit("Please provide a file.")      #CHANGE TO INCLUDE SUPPLIED PATH/FILE NAME
+    print(f"Please provide a csv file. Provided path and file is: {path}")
+    raise SystemExit(USAGE)
+
+except ValueError as error:
+    print(
+        f"{sys.argv[0]} expects exactly 4 values in the order of name,color,nickname,role. See See https://github.com/maardal/spacey_svg_builder for more details."
+    )
+    raise SystemExit(USAGE)
+
 except OSError as error:
-      print(error.__class__)
-      print(error)
-      SystemExit("Could not open and/or read file. File must be csv file in the supported format. See https://github.com/maardal/spacey_svg_builder")
-except Exception as execption:
-      print(execption.__class__)
-      SystemExit("Unexpected error. Report error at https://github.com/maardal/spacey_svg_builder")
-finally:
-      csvfile.close()
+    print(
+        "Could not open and/or read file. File must be csv file in the supported format. See https://github.com/maardal/spacey_svg_builder for more details."
+    )
+    raise SystemExit(USAGE)
+
+except Exception as exception:
+    print(exception.__class__)
+    print(exception)
+    print(
+        "\nUnexpected error. Report error at https://github.com/maardal/spacey_svg_builder\n"
+    )
+    raise SystemExit(USAGE)
+
+csvfile.close()
 
 # Base sizes of elements and SVG.
 
