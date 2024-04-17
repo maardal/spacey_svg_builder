@@ -12,7 +12,7 @@ filled with twitch chatter's who has redeemed a spot on the t-shirt.
 
 ## Usage
 
-    python ssb [--help] | <path_to_csv_file>
+    python spacey_sb [--help] | <path_to_csv_file>
 
 Developed for Python version 3.10.6. Not tested for any other version.
 
