@@ -324,6 +324,6 @@ et.indent(svg, "  ")
 
 currentDateTime = datetime.now().strftime("-%Y%m%d-%H%M%S")
 
-f = open(f"sample{currentDateTime}.svg", "wb")
+f = open(f"spacey{currentDateTime}.svg", "wb")
 f.write(et.tostring(svg))
 f.close()
