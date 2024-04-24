@@ -24,9 +24,9 @@
 # Script saves the files with a timestamp on the format yyyy-mm-dd-hr-mm-ss.
 
 import sys
-import pathlib
 import csv
 import math
+from pathlib import Path
 from datetime import datetime
 from xml.etree import ElementTree as et
 
@@ -73,36 +73,61 @@ class Size:
         self.roleIconHeight *= number
 
 
-# Reading command line arguments.
+def hasCommandLineArgument(sysArgs):
+    return len(sysArgs) > 1
 
-USAGE = f"Usage: python {sys.argv[0]} [--help] | <path_to_csv_file>"
 
-if len(sys.argv) == 1:
-    print("No file supplied.")
-    raise SystemExit(USAGE)
+def isHelpCommand(argument):
+    return str(argument).lower() == "--help" or str(argument).lower() == "-h"
 
-path = pathlib.Path(sys.argv[1])
 
-if str(path).lower() == "--help" or str(path).lower() == "-h":
-    print(USAGE)
-    print("\nCreates a list of Twitch usernames on a SVG format, based on CSV file.")
-    print(
-        "See https://github.com/maardal/spacey_svg_builder on requirements for CSV file."
-    )
-    print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
-    print()
-    raise SystemExit()
+def validateCLIArguments():
+    sysArgs = sys.argv
+    scriptName = sysArgs[0]
+    USAGE = f"Usage: python {scriptName} [--help] | <path_to_csv_file>"  # Move to global scope? #make command that returns the string?
 
-elif path.suffix.lower() != ".csv":
-    print("File format needs to be CSV.")
-    raise SystemExit(USAGE)
+    if not hasCommandLineArgument(sysArgs):
+        print("No arguments provided.")
+        raise SystemExit(USAGE)
+
+    argument = sysArgs[1]
+
+    if isHelpCommand(argument):
+        print(USAGE)
+        print(
+            "\nCreates a list of Twitch usernames on a SVG format, based on CSV file."
+        )
+        print(
+            "See https://github.com/maardal/spacey_svg_builder for requirements for CSV file."
+        )
+        print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
+        print()
+        raise SystemExit()
+
+    filePath = Path(argument)
+
+    if not filePath.exists:
+        print("Path/File does not exist.")
+        raise SystemExit(USAGE)
+
+    if not filePath.is_file():
+        print("File not provided.")
+        raise SystemExit(USAGE)
+
+    if not filePath.suffix.lower() == ".csv":
+        print("File format needs to be CSV.")
+        raise SystemExit(USAGE)
+
+    return scriptName, filePath
+
 
 # Importing the list of viewers.
 
 viewers = []
+test, csvPath = validateCLIArguments()
 
 try:
-    with open(path, newline="") as csvfile:
+    with open(csvPath, newline="") as csvfile:
         viewer_list = csv.reader(csvfile, delimiter=",", quotechar="|")
         for name, color, nickname, role in viewer_list:
             if name != "":
@@ -327,3 +352,16 @@ currentDateTime = datetime.now().strftime("-%Y%m%d-%H%M%S")
 f = open(f"spacey{currentDateTime}.svg", "wb")
 f.write(et.tostring(svg))
 f.close()
+
+
+def main():
+    scriptName, path = validateCLIArguments()
+    # add method for retriving CSV Data
+    # set size of SVG
+    # set coordinates for names
+    # build svg
+
+
+if __name__ == "__main__":
+    print("--- __main__ - Refactoring towards methods - main does nothing atm ---")
+    main()
