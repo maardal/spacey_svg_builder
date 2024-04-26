@@ -170,6 +170,73 @@ def processCSV(scriptName, csvPath):
     return viewers
 
 
+# Calculate coordinates for names. Will not let names overflow the width of the SVG.
+# Also sorts list name, so spaces at the end of a line will be filled by the first possible name that is short enough.
+def set_viewer_coordinates(viewers):
+    # Base sizes of elements and SVG.
+
+    monospacedFont = "Consolas"
+    baseFontSize = 16
+    baseFontCharLength = 10
+    baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
+    baseCharLengthOffset = 0
+    baseImageWidth = 800
+    svgHeight = 0  # svgHeight is determined by the amount of names.
+
+    # Resize SVG.
+
+    size = Size(
+        baseFontSize,
+        baseFontCharLength,
+        baseCharHeightOffset,
+        baseCharLengthOffset,
+        baseImageWidth,
+    )
+    multiplicationFactor = 2
+    size.multiply(multiplicationFactor)
+
+    sorted_list = []
+    temp_remove_array = []
+    temp_max_x = size.svgWidth
+    temp_x = 0
+
+    while len(viewers) > 0:
+        for j in range(0, len(viewers)):
+            if temp_max_x == 0:
+                break
+
+            temp_viewer = viewers[j]
+            calulatedPixelLengthName = (
+                math.ceil(len(temp_viewer.displayName) * size.charLength)
+                + size.charLenghtOffset
+            )
+            if temp_viewer.role == "vip" or temp_viewer.role == "mod":
+                calulatedPixelLengthName += size.roleIconWidth
+
+            if calulatedPixelLengthName <= temp_max_x:
+                temp_viewer.x = temp_x
+                temp_viewer.y = svgHeight
+                temp_x = temp_x + calulatedPixelLengthName
+
+                sorted_list.append(temp_viewer)
+                temp_remove_array.append(j)
+
+                temp_max_x = temp_max_x - calulatedPixelLengthName
+
+        temp_remove_array_copy = temp_remove_array.copy()
+        temp_remove_array_copy.reverse()
+
+        for viewer_list_index in temp_remove_array_copy:
+            viewers.pop(viewer_list_index)
+
+        temp_remove_array.clear()
+        temp_max_x = size.svgWidth
+        temp_x = 0
+        svgHeight += size.charHeightOffset
+
+    return sorted_list, svgHeight
+
+
 # Base sizes of elements and SVG.
 
 monospacedFont = "Consolas"
@@ -192,51 +259,9 @@ size = Size(
 multiplicationFactor = 2
 size.multiply(multiplicationFactor)
 
-# Calculate coordinates for names. Will not let names overflow the width of the SVG.
-# Also sorts list name, so spaces at the end of a line will be filled by the first possible name that is short enough.
-
-sorted_list = []
-temp_remove_array = []
-temp_max_x = size.svgWidth
-temp_x = 0
-
 scriptName, csvPath = validate_cli_arguments()
 viewers = processCSV(scriptName, csvPath)
-
-while len(viewers) > 0:
-    for j in range(0, len(viewers)):
-        if temp_max_x == 0:
-            break
-
-        temp_viewer = viewers[j]
-        calulatedPixelLengthName = (
-            math.ceil(len(temp_viewer.displayName) * size.charLength)
-            + size.charLenghtOffset
-        )
-        if temp_viewer.role == "vip" or temp_viewer.role == "mod":
-            calulatedPixelLengthName += size.roleIconWidth
-
-        if calulatedPixelLengthName <= temp_max_x:
-            temp_viewer.x = temp_x
-            temp_viewer.y = svgHeight
-            temp_x = temp_x + calulatedPixelLengthName
-
-            sorted_list.append(temp_viewer)
-            temp_remove_array.append(j)
-
-            temp_max_x = temp_max_x - calulatedPixelLengthName
-
-    temp_remove_array_copy = temp_remove_array.copy()
-    temp_remove_array_copy.reverse()
-
-    for viewer_list_index in temp_remove_array_copy:
-        viewers.pop(viewer_list_index)
-
-    temp_remove_array.clear()
-    temp_max_x = size.svgWidth
-    temp_x = 0
-    svgHeight += size.charHeightOffset
-
+sorted_viewer_list, svgHeight = set_viewer_coordinates(viewers)
 
 # Build SVG.
 
@@ -314,7 +339,8 @@ svg.append(defs)
 
 ## Place names in SVG based on coordinates.
 
-for viewer in sorted_list:
+
+for viewer in sorted_viewer_list:
     viewer_x_position = viewer.x
 
     if viewer.role.lower() == "vip":
@@ -365,7 +391,9 @@ f.close()
 def main():
     scriptName, csvPath = validate_cli_arguments()
     viewers = processCSV(scriptName, csvPath)
-    print(viewers.__class__)
+    sorted_viewers, svgHeight = set_viewer_coordinates(viewers)
+    for x in range(10):
+        print(sorted_viewers[x].color)
     # add method for retriving CSV Data
     # set size of SVG
     # set coordinates for names
