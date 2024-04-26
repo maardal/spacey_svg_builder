@@ -391,12 +391,10 @@ f.close()
 def main():
     scriptName, csvPath = validate_cli_arguments()
     viewers = processCSV(scriptName, csvPath)
+    # set size of SVG - yet to make this function.
     sorted_viewers, svgHeight = set_viewer_coordinates(viewers)
     for x in range(10):
         print(sorted_viewers[x].color)
-    # add method for retriving CSV Data
-    # set size of SVG
-    # set coordinates for names
     # build svg
 
 
