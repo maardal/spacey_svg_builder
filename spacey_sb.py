@@ -24,7 +24,7 @@
 # Script saves the files with a timestamp on the format yyyy-mm-dd-hr-mm-ss.
 
 import sys
-import csv
+import csv as csvReader
 import math
 from pathlib import Path
 from datetime import datetime
@@ -81,6 +81,16 @@ def is_help_command(argument):
     return str(argument).lower() == "--help" or str(argument).lower() == "-h"
 
 
+def print_help():
+    print()
+    print("\nCreates a list of Twitch usernames on a SVG format, based on CSV file.")
+    print(
+        "See https://github.com/maardal/spacey_svg_builder for requirements for CSV file."
+    )
+    print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
+    print()
+
+
 def validate_cli_arguments():
     sysArgs = sys.argv
     scriptName = sysArgs[0]
@@ -110,62 +120,55 @@ def validate_cli_arguments():
         print("File format needs to be CSV.")
         raise SystemExit(USAGE)
 
-    return scriptName, filePath
+    return scriptName, str(filePath)
 
 
-def print_help():
-    print()
-    print("\nCreates a list of Twitch usernames on a SVG format, based on CSV file.")
-    print(
-        "See https://github.com/maardal/spacey_svg_builder for requirements for CSV file."
-    )
-    print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
-    print()
+def processCSV(scriptName, csvPath):
+    viewers = []
+    USAGE = f"Usage: python {scriptName} [--help] | <path_to_csv_file>"  # Move to global scope? #make command that returns the string?
 
-
-# Importing the list of viewers.
-
-viewers = []
-test, csvPath = validate_cli_arguments()
-
-try:
-    with open(csvPath, newline="") as csvfile:
-        viewer_list = csv.reader(csvfile, delimiter=",", quotechar="|")
-        for name, color, nickname, role in viewer_list:
-            if name != "":
-                viewers.append(
-                    Viewer(
-                        nickname.strip() if nickname != "" else name.strip(),
-                        color.strip(),
-                        role.strip().lower(),
+    try:
+        with open(csvPath, newline="") as csvfile:
+            viewer_list = csvReader.reader(csvfile, delimiter=",", quotechar="|")
+            for name, color, nickname, role in viewer_list:
+                if name != "":
+                    viewers.append(
+                        Viewer(
+                            nickname.strip() if nickname != "" else name.strip(),
+                            color.strip(),
+                            role.strip().lower(),
+                        )
                     )
-                )
 
-except FileNotFoundError as error:
-    print(f"Please provide a csv file. Provided path and file is: {path}")
-    raise SystemExit(USAGE)
+    except FileNotFoundError as error:
+        print(f"Please provide a csv file. Provided path and file is: {csvPath}")
+        raise SystemExit(USAGE)
 
-except ValueError as error:
-    print(
-        f"{sys.argv[0]} expects exactly 4 values in the order of name,color,nickname,role. See See https://github.com/maardal/spacey_svg_builder for more details."
-    )
-    raise SystemExit(USAGE)
+    except ValueError as error:
+        print(
+            f"{scriptName} expects exactly 4 values in the order of name,color,nickname,role. See See https://github.com/maardal/spacey_svg_builder for more details."
+        )
+        raise SystemExit(USAGE)
 
-except OSError as error:
-    print(
-        "Could not open and/or read file. File must be csv file in the supported format. See https://github.com/maardal/spacey_svg_builder for more details."
-    )
-    raise SystemExit(USAGE)
+    except OSError as error:
+        print(
+            "Could not open and/or read file. File must be csv file in the supported format. See https://github.com/maardal/spacey_svg_builder for more details."
+        )
+        raise SystemExit(USAGE)
 
-except Exception as exception:
-    print(exception.__class__)
-    print(exception)
-    print(
-        "\nUnexpected error. Report error at https://github.com/maardal/spacey_svg_builder\n"
-    )
-    raise SystemExit(USAGE)
+    except Exception as exception:
+        print("IN METHOD")
+        print(exception.__class__)
+        print(exception)
+        print(
+            "\nUnexpected error. Report error at https://github.com/maardal/spacey_svg_builder\n"
+        )
+        raise SystemExit(USAGE)
 
-csvfile.close()
+    csvfile.close()
+
+    return viewers
+
 
 # Base sizes of elements and SVG.
 
@@ -196,6 +199,9 @@ sorted_list = []
 temp_remove_array = []
 temp_max_x = size.svgWidth
 temp_x = 0
+
+scriptName, csvPath = validate_cli_arguments()
+viewers = processCSV(scriptName, csvPath)
 
 while len(viewers) > 0:
     for j in range(0, len(viewers)):
@@ -357,7 +363,9 @@ f.close()
 
 
 def main():
-    scriptName, path = validate_cli_arguments()
+    scriptName, csvPath = validate_cli_arguments()
+    viewers = processCSV(scriptName, csvPath)
+    print(viewers.__class__)
     # add method for retriving CSV Data
     # set size of SVG
     # set coordinates for names
