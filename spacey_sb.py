@@ -73,36 +73,28 @@ class Size:
         self.roleIconHeight *= number
 
 
-def hasCommandLineArgument(sysArgs):
+def has_command_line_argument(sysArgs):
     return len(sysArgs) > 1
 
 
-def isHelpCommand(argument):
+def is_help_command(argument):
     return str(argument).lower() == "--help" or str(argument).lower() == "-h"
 
 
-def validateCLIArguments():
+def validate_cli_arguments():
     sysArgs = sys.argv
     scriptName = sysArgs[0]
     USAGE = f"Usage: python {scriptName} [--help] | <path_to_csv_file>"  # Move to global scope? #make command that returns the string?
 
-    if not hasCommandLineArgument(sysArgs):
+    if not has_command_line_argument(sysArgs):
         print("No arguments provided.")
         raise SystemExit(USAGE)
 
     argument = sysArgs[1]
 
-    if isHelpCommand(argument):
-        print(USAGE)
-        print(
-            "\nCreates a list of Twitch usernames on a SVG format, based on CSV file."
-        )
-        print(
-            "See https://github.com/maardal/spacey_svg_builder for requirements for CSV file."
-        )
-        print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
-        print()
-        raise SystemExit()
+    if is_help_command(argument):
+        print_help()
+        raise SystemExit(USAGE)
 
     filePath = Path(argument)
 
@@ -121,10 +113,20 @@ def validateCLIArguments():
     return scriptName, filePath
 
 
+def print_help():
+    print()
+    print("\nCreates a list of Twitch usernames on a SVG format, based on CSV file.")
+    print(
+        "See https://github.com/maardal/spacey_svg_builder for requirements for CSV file."
+    )
+    print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
+    print()
+
+
 # Importing the list of viewers.
 
 viewers = []
-test, csvPath = validateCLIArguments()
+test, csvPath = validate_cli_arguments()
 
 try:
     with open(csvPath, newline="") as csvfile:
@@ -355,7 +357,7 @@ f.close()
 
 
 def main():
-    scriptName, path = validateCLIArguments()
+    scriptName, path = validate_cli_arguments()
     # add method for retriving CSV Data
     # set size of SVG
     # set coordinates for names
