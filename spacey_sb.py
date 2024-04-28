@@ -168,31 +168,13 @@ def processCSV(scriptName, csvPath):
 
 # Calculate coordinates for names. Will not let names overflow the width of the SVG.
 # Also sorts list name, so spaces at the end of a line will be filled by the first possible name that is short enough.
-def set_viewer_coordinates(viewers):
-    # Base sizes of elements and SVG.
-
-    monospacedFont = "Consolas"
-    baseFontSize = 16
-    baseFontCharLength = 10
-    baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
-    baseImageWidth = 800
-    svgHeight = 0  # svgHeight is determined by the amount of names.
-
-    # Resize SVG.
-
-    size = Size(
-        baseFontSize,
-        baseFontCharLength,
-        baseCharHeightOffset,
-        baseImageWidth,
-    )
-    multiplicationFactor = 2
-    size.multiply(multiplicationFactor)
+def set_viewer_coordinates(viewers, sizes):
 
     sorted_list = []
     temp_remove_array = []
-    temp_max_x = size.svgWidth
+    temp_max_x = sizes.svgWidth
     temp_x = 0
+    svgHeight = 0  # svgHeight is determined by the amount of names.
 
     while len(viewers) > 0:
         for j in range(0, len(viewers)):
@@ -200,12 +182,11 @@ def set_viewer_coordinates(viewers):
                 break
 
             temp_viewer = viewers[j]
-            calulatedPixelLengthName = (
-                math.ceil(len(temp_viewer.displayName) * size.charLength)
-                + size.charLenghtOffset
+            calulatedPixelLengthName = math.ceil(
+                len(temp_viewer.displayName) * sizes.charLength
             )
             if temp_viewer.role == "vip" or temp_viewer.role == "mod":
-                calulatedPixelLengthName += size.roleIconWidth
+                calulatedPixelLengthName += sizes.roleIconWidth
 
             if calulatedPixelLengthName <= temp_max_x:
                 temp_viewer.x = temp_x
@@ -224,9 +205,9 @@ def set_viewer_coordinates(viewers):
             viewers.pop(viewer_list_index)
 
         temp_remove_array.clear()
-        temp_max_x = size.svgWidth
+        temp_max_x = sizes.svgWidth
         temp_x = 0
-        svgHeight += size.charHeightOffset
+        svgHeight += sizes.charHeightOffset
 
     return sorted_list, svgHeight
 
@@ -253,7 +234,7 @@ size.multiply(multiplicationFactor)
 
 scriptName, csvPath = validate_cli_arguments()
 viewers = processCSV(scriptName, csvPath)
-sorted_viewer_list, svgHeight = set_viewer_coordinates(viewers)
+sorted_viewer_list, svgHeight = set_viewer_coordinates(viewers, size)
 
 # Build SVG.
 
@@ -384,7 +365,7 @@ def main():
     scriptName, csvPath = validate_cli_arguments()
     viewers = processCSV(scriptName, csvPath)
     # set size of SVG - yet to make this function.
-    sorted_viewers, svgHeight = set_viewer_coordinates(viewers)
+    sorted_viewers, svgHeight = set_viewer_coordinates(viewers, size)
     for x in range(10):
         print(sorted_viewers[x].color)
     # build svg
