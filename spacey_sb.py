@@ -52,13 +52,10 @@ class Size:
     iconWidth = 12
     iconHeight = 10
 
-    def __init__(
-        self, fontSize, charLength, charheightOffset, charLengthOffset, svgWidth
-    ):
+    def __init__(self, fontSize, charLength, charheightOffset, svgWidth):
         self.fontSize = fontSize
         self.charLength = charLength
         self.charHeightOffset = charheightOffset
-        self.charLenghtOffset = charLengthOffset
         self.svgWidth = svgWidth
         self.roleIconWidth = 12
         self.roleIconHeight = 10
@@ -67,7 +64,6 @@ class Size:
         self.fontSize *= number
         self.charLength *= number
         self.charHeightOffset *= number
-        self.charLenghtOffset *= number
         self.svgWidth *= number
         self.roleIconWidth *= number
         self.roleIconHeight *= number
@@ -179,7 +175,6 @@ def set_viewer_coordinates(viewers):
     baseFontSize = 16
     baseFontCharLength = 10
     baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
-    baseCharLengthOffset = 0
     baseImageWidth = 800
     svgHeight = 0  # svgHeight is determined by the amount of names.
 
@@ -189,7 +184,6 @@ def set_viewer_coordinates(viewers):
         baseFontSize,
         baseFontCharLength,
         baseCharHeightOffset,
-        baseCharLengthOffset,
         baseImageWidth,
     )
     multiplicationFactor = 2
@@ -243,7 +237,6 @@ monospacedFont = "Consolas"
 baseFontSize = 16
 baseFontCharLength = 10
 baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
-baseCharLengthOffset = 0
 baseImageWidth = 800
 svgHeight = 0  # svgHeight is determined by the amount of names.
 
@@ -253,7 +246,6 @@ size = Size(
     baseFontSize,
     baseFontCharLength,
     baseCharHeightOffset,
-    baseCharLengthOffset,
     baseImageWidth,
 )
 multiplicationFactor = 2
