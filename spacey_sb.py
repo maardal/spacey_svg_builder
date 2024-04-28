@@ -89,6 +89,8 @@ class Font:
 
 def set_base_sizes():
 
+    print("Setting base sizes for elements...")
+
     baseFontSize = 16
     baseFontCharLength = 10
     baseFontCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
@@ -127,6 +129,9 @@ def print_help():
 
 
 def validate_cli_arguments():
+
+    print("validating cli arguments")
+
     sysArgs = sys.argv
     scriptName = sysArgs[0]
     USAGE = f"Usage: python {scriptName} [--help] | <path_to_csv_file>"  # Move to global scope? #make command that returns the string?
@@ -398,13 +403,13 @@ def main():
     svgSize.multiply(multiplicationFactor)
     roleIconSize.multiply(multiplicationFactor)
 
-    baseFont = Font("Consolas", fontSize)
+    font = Font("Consolas", fontSize)
 
     # set size of SVG - yet to make this function.
     sorted_viewers, svgSize = set_viewer_coordinates(
         viewers, svgSize, fontSize, roleIconSize
     )
-    build_svg(sorted_viewers, baseFont, svgSize, roleIconSize)
+    build_svg(sorted_viewers, font, svgSize, roleIconSize)
 
 
 if __name__ == "__main__":
