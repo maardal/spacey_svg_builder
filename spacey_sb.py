@@ -47,26 +47,44 @@ class Viewer:
 ## Class to more easily increase the size of the produced SVG.
 
 
-class Size:
+class ElementSize:
 
-    iconWidth = 12
-    iconHeight = 10
+    width = 0
+    height = 0
 
-    def __init__(self, fontSize, charLength, charheightOffset, svgWidth):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def multiply(self, number):
+        self.width *= number
+        self.height *= number
+
+
+class FontSize:
+
+    fontSize = 0
+    charLength = 0
+    charHeightOffset = 0
+
+    def __init__(self, fontSize, charLength, charHeightOffset):
         self.fontSize = fontSize
         self.charLength = charLength
-        self.charHeightOffset = charheightOffset
-        self.svgWidth = svgWidth
-        self.roleIconWidth = 12
-        self.roleIconHeight = 10
+        self.charHeightOffset = charHeightOffset
 
     def multiply(self, number):
         self.fontSize *= number
         self.charLength *= number
         self.charHeightOffset *= number
-        self.svgWidth *= number
-        self.roleIconWidth *= number
-        self.roleIconHeight *= number
+
+
+class Font:
+
+    font = "Consolas"
+
+    def __init__(self, font, fontSize):
+        self.font = font
+        self.fontSize = fontSize
 
 
 def has_command_line_argument(sysArgs):
@@ -120,6 +138,7 @@ def validate_cli_arguments():
 
 
 def processCSV(scriptName, csvPath):
+    print(f"{scriptName} processing CSV...")
     viewers = []
     USAGE = f"Usage: python {scriptName} [--help] | <path_to_csv_file>"  # Move to global scope? #make command that returns the string?
 
@@ -168,11 +187,13 @@ def processCSV(scriptName, csvPath):
 
 # Calculate coordinates for names. Will not let names overflow the width of the SVG.
 # Also sorts list name, so spaces at the end of a line will be filled by the first possible name that is short enough.
-def set_viewer_coordinates(viewers, sizes):
+def set_viewer_coordinates(viewers, svgSize, fontSize, roleIconSize):
+
+    print("Calculating coordinates for names...")
 
     sorted_list = []
     temp_remove_array = []
-    temp_max_x = sizes.svgWidth
+    temp_max_x = svgSize.width
     temp_x = 0
     svgHeight = 0  # svgHeight is determined by the amount of names.
 
@@ -183,10 +204,10 @@ def set_viewer_coordinates(viewers, sizes):
 
             temp_viewer = viewers[j]
             calulatedPixelLengthName = math.ceil(
-                len(temp_viewer.displayName) * sizes.charLength
+                len(temp_viewer.displayName) * fontSize.charLength
             )
             if temp_viewer.role == "vip" or temp_viewer.role == "mod":
-                calulatedPixelLengthName += sizes.roleIconWidth
+                calulatedPixelLengthName += roleIconSize.width
 
             if calulatedPixelLengthName <= temp_max_x:
                 temp_viewer.x = temp_x
@@ -205,54 +226,34 @@ def set_viewer_coordinates(viewers, sizes):
             viewers.pop(viewer_list_index)
 
         temp_remove_array.clear()
-        temp_max_x = sizes.svgWidth
+        temp_max_x = svgSize.width
         temp_x = 0
-        svgHeight += sizes.charHeightOffset
+        svgHeight += fontSize.charHeightOffset
 
-    return sorted_list, svgHeight
+    svgSize.height = svgHeight
 
-
-# Base sizes of elements and SVG.
-
-monospacedFont = "Consolas"
-baseFontSize = 16
-baseFontCharLength = 10
-baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
-baseImageWidth = 800
-svgHeight = 0  # svgHeight is determined by the amount of names.
-
-# Resize SVG.
-
-size = Size(
-    baseFontSize,
-    baseFontCharLength,
-    baseCharHeightOffset,
-    baseImageWidth,
-)
-multiplicationFactor = 2
-size.multiply(multiplicationFactor)
-
-scriptName, csvPath = validate_cli_arguments()
-viewers = processCSV(scriptName, csvPath)
-sorted_viewer_list, svgHeight = set_viewer_coordinates(viewers, size)
+    return sorted_list, svgSize
 
 
-def build_svg(viewer_list, sizes, svgHeight):
+def build_svg(viewer_list, font, svgSize, roleIconSize):
     # Build SVG.
+    print("Building svg...")
+
+    heightBuffer = 10
 
     svg = et.Element(
         "svg",
-        width=str(sizes.svgWidth),
-        height=str(svgHeight + 10),
+        width=str(svgSize.width),
+        height=str(svgSize.height + heightBuffer),
         version="1.1",
         xmlns="http://www.w3.org/2000/svg",
-        viewBox=f"0 -{sizes.fontSize} {sizes.svgWidth} {svgHeight}",
+        viewBox=f"0 -{font.fontSize.fontSize} {svgSize.width} {svgSize.height}",
     )
 
     defs = et.Element("defs")
 
-    iconWidth = Size.iconWidth * multiplicationFactor
-    iconHeight = Size.iconHeight * multiplicationFactor
+    iconWidth = roleIconSize.width
+    iconHeight = roleIconSize.height
 
     ## vip_badge_coordinates - a diamond.
     diamond_left_middle = f"{0} {iconHeight * 0.26}"
@@ -328,7 +329,7 @@ def build_svg(viewer_list, sizes, svgHeight):
                     fill="url(#vip_badge)",
                 )
             )
-            viewer_x_position += sizes.roleIconWidth
+            viewer_x_position += iconWidth
 
         if viewer.role.lower() == "mod":
             svg.append(
@@ -341,14 +342,14 @@ def build_svg(viewer_list, sizes, svgHeight):
                     fill="url(#mod_badge)",
                 )
             )
-            viewer_x_position += sizes.roleIconWidth
+            viewer_x_position += iconWidth
 
         text = et.Element(
             "text",
             x=str(viewer_x_position),
             y=str(viewer.y),
             fill=str(viewer.color),
-            style=f"font-family:{monospacedFont}; font-size:{sizes.fontSize}px",
+            style=f"font-family:{font.font}; font-size:{font.fontSize.fontSize}px",
         )
         text.text = viewer.displayName
         svg.append(text)
@@ -361,17 +362,40 @@ def build_svg(viewer_list, sizes, svgHeight):
     f.write(et.tostring(svg))
     f.close()
 
-    return "test"
+    print("SVG built...")
 
 
 def main():
+
     scriptName, csvPath = validate_cli_arguments()
     viewers = processCSV(scriptName, csvPath)
+
+    baseFontSize = 16
+    baseFontCharLength = 10
+    baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
+    baseImageWidth = 800
+    svgHeight = 0  # svgHeight is determined by the amount of names.
+    roleIconHeight = 10
+    roleIconWidth = 12
+
+    multiplicationFactor = 2
+
+    fontSizeForBase = FontSize(baseFontSize, baseFontCharLength, baseCharHeightOffset)
+    svgSize = ElementSize(baseImageWidth, svgHeight)
+    roleIconSize = ElementSize(roleIconWidth, roleIconHeight)
+
+    fontSizeForBase.multiply(multiplicationFactor)
+    svgSize.multiply(multiplicationFactor)
+    roleIconSize.multiply(multiplicationFactor)
+
+    baseFont = Font("Consolas", fontSizeForBase)
+
     # set size of SVG - yet to make this function.
-    sorted_viewers, svgHeight = set_viewer_coordinates(viewers, size)
-    build_svg(sorted_viewers, size, svgHeight)
+    sorted_viewers, svgSize = set_viewer_coordinates(
+        viewers, svgSize, fontSizeForBase, roleIconSize
+    )
+    build_svg(sorted_viewers, baseFont, svgSize, roleIconSize)
 
 
 if __name__ == "__main__":
-    print("--- __main__ - Refactoring towards methods - main does nothing atm ---")
     main()
