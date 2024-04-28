@@ -87,6 +87,27 @@ class Font:
         self.fontSize = fontSize
 
 
+def set_base_sizes():
+
+    baseFontSize = 16
+    baseFontCharLength = 10
+    baseFontCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
+
+    fontSize = FontSize(baseFontSize, baseFontCharLength, baseFontCharHeightOffset)
+
+    svgWidth = 800
+    svgHeight = 0
+
+    svgSize = ElementSize(svgWidth, svgHeight)
+
+    roleIconWidth = 12
+    roleIconHeight = 10
+
+    roleIconSize = ElementSize(roleIconWidth, roleIconHeight)
+
+    return fontSize, svgSize, roleIconSize
+
+
 def has_command_line_argument(sysArgs):
     return len(sysArgs) > 1
 
@@ -366,33 +387,22 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
 
 
 def main():
+    fontSize, svgSize, roleIconSize = set_base_sizes()
 
     scriptName, csvPath = validate_cli_arguments()
     viewers = processCSV(scriptName, csvPath)
 
-    baseFontSize = 16
-    baseFontCharLength = 10
-    baseCharHeightOffset = baseFontSize + math.floor((baseFontSize / 10))
-    baseImageWidth = 800
-    svgHeight = 0  # svgHeight is determined by the amount of names.
-    roleIconHeight = 10
-    roleIconWidth = 12
-
     multiplicationFactor = 2
 
-    fontSizeForBase = FontSize(baseFontSize, baseFontCharLength, baseCharHeightOffset)
-    svgSize = ElementSize(baseImageWidth, svgHeight)
-    roleIconSize = ElementSize(roleIconWidth, roleIconHeight)
-
-    fontSizeForBase.multiply(multiplicationFactor)
+    fontSize.multiply(multiplicationFactor)
     svgSize.multiply(multiplicationFactor)
     roleIconSize.multiply(multiplicationFactor)
 
-    baseFont = Font("Consolas", fontSizeForBase)
+    baseFont = Font("Consolas", fontSize)
 
     # set size of SVG - yet to make this function.
     sorted_viewers, svgSize = set_viewer_coordinates(
-        viewers, svgSize, fontSizeForBase, roleIconSize
+        viewers, svgSize, fontSize, roleIconSize
     )
     build_svg(sorted_viewers, baseFont, svgSize, roleIconSize)
 
