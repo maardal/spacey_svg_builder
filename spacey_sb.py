@@ -282,11 +282,7 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
     iconHeight = roleIconSize.height
 
     ## vip_badge_coordinates - a diamond.
-    diamond_left_middle = f"{0} {iconHeight * 0.26}"
-    diamond_left_top = f"{iconWidth * 0.1875} {0}"
-    diamond_right_top = f"{iconWidth * 0.8125} {0}"
-    diamond_right_middle = f"{iconWidth} {iconHeight * 0.26}"
-    diamond_bottom_tip = f"{iconWidth/2} {iconHeight}"
+    vip_pattern_points = create_vip_pattern_points_string(iconWidth, iconHeight)
 
     vip_pattern_definition = et.SubElement(
         defs,
@@ -302,23 +298,11 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
         vip_pattern_definition,
         "polygon",
         fill="#fb0493",
-        points=f"{diamond_left_middle}, {diamond_left_top}, {diamond_right_top}, {diamond_right_middle}, {diamond_bottom_tip}",
+        points=vip_pattern_points,
     )
 
     ## mod_badge_coordinates - a sword.
-    grip_bottom_left = f"{0} {iconHeight * 0.875}"
-    grip_upper_left = f"{iconWidth * 0.125} {iconHeight * 0.6875}"
-    guard_bottom_left = f"{0} {iconHeight * 0.5625}"
-    guard_upper_left = f"{iconWidth * 0.125} {iconHeight * 0.4375}"
-    blade_base_left = f"{iconWidth * 0.275} {iconHeight * 0.55}"
-    blade_point_left = f"{iconWidth * 0.75} {0}"
-    blade_point_middle = f"{iconWidth} {0}"
-    blade_point_right = f"{iconWidth} {iconHeight * 0.25}"
-    blade_base_right = f"{iconWidth * 0.4375} {iconHeight * 0.6875}"
-    guard_upper_right = f"{iconWidth * 0.625} {iconHeight * 0.875}"
-    guard_bottom_right = f"{iconWidth * 0.5} {iconHeight}"
-    grip_upper_right = f"{iconWidth * 0.275} {iconHeight * 0.875}"
-    grip_bottom_right = f"{iconWidth * 0.125} {iconHeight}"
+    mod_pattern_points = create_mod_pattern_points_string(iconWidth, iconHeight)
 
     mod_pattern_definition = et.SubElement(
         defs,
@@ -334,7 +318,7 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
         mod_pattern_definition,
         "polygon",
         fill="#14cb04",
-        points=f"{grip_bottom_left}, {grip_upper_left}, {guard_bottom_left}, {guard_upper_left}, {blade_base_left}, {blade_point_left}, {blade_point_middle}, {blade_point_right}, {blade_base_right}, {guard_upper_right}, {guard_bottom_right}, {grip_upper_right}, {grip_bottom_right}",
+        points=mod_pattern_points,
     )
 
     svg.append(defs)
@@ -389,6 +373,34 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
     f.close()
 
     print("SVG built...")
+
+
+def create_vip_pattern_points_string(iconWidth, iconHeight):
+    diamond_left_middle = f"{0} {iconHeight * 0.26}"
+    diamond_left_top = f"{iconWidth * 0.1875} {0}"
+    diamond_right_top = f"{iconWidth * 0.8125} {0}"
+    diamond_right_middle = f"{iconWidth} {iconHeight * 0.26}"
+    diamond_bottom_tip = f"{iconWidth/2} {iconHeight}"
+
+    return f"{diamond_left_middle}, {diamond_left_top}, {diamond_right_top}, {diamond_right_middle}, {diamond_bottom_tip}"
+
+
+def create_mod_pattern_points_string(iconWidth, iconHeight):
+    grip_bottom_left = f"{0} {iconHeight * 0.875}"
+    grip_upper_left = f"{iconWidth * 0.125} {iconHeight * 0.6875}"
+    guard_bottom_left = f"{0} {iconHeight * 0.5625}"
+    guard_upper_left = f"{iconWidth * 0.125} {iconHeight * 0.4375}"
+    blade_base_left = f"{iconWidth * 0.275} {iconHeight * 0.55}"
+    blade_point_left = f"{iconWidth * 0.75} {0}"
+    blade_point_middle = f"{iconWidth} {0}"
+    blade_point_right = f"{iconWidth} {iconHeight * 0.25}"
+    blade_base_right = f"{iconWidth * 0.4375} {iconHeight * 0.6875}"
+    guard_upper_right = f"{iconWidth * 0.625} {iconHeight * 0.875}"
+    guard_bottom_right = f"{iconWidth * 0.5} {iconHeight}"
+    grip_upper_right = f"{iconWidth * 0.275} {iconHeight * 0.875}"
+    grip_bottom_right = f"{iconWidth * 0.125} {iconHeight}"
+
+    return f"{grip_bottom_left}, {grip_upper_left}, {guard_bottom_left}, {guard_upper_left}, {blade_base_left}, {blade_point_left}, {blade_point_middle}, {blade_point_right}, {blade_base_right}, {guard_upper_right}, {guard_bottom_right}, {grip_upper_right}, {grip_bottom_right}"
 
 
 def main():
