@@ -26,6 +26,7 @@
 import sys
 import csv as csvReader
 import math
+from abc import ABC, abstractmethod
 from pathlib import Path
 from datetime import datetime
 from xml.etree import ElementTree as et
@@ -47,7 +48,13 @@ class Viewer:
 ## Class to more easily increase the size of the produced SVG.
 
 
-class ElementSize:
+class Size(ABC):
+    @abstractmethod
+    def multiply(self, number):
+        pass
+
+
+class ElementSize(Size):
 
     width = 0
     height = 0
@@ -61,7 +68,7 @@ class ElementSize:
         self.height *= number
 
 
-class FontSize:
+class FontSize(Size):
 
     fontSize = 0
     charLength = 0
@@ -403,21 +410,25 @@ def create_mod_pattern_points_string(iconWidth, iconHeight):
     return f"{grip_bottom_left}, {grip_upper_left}, {guard_bottom_left}, {guard_upper_left}, {blade_base_left}, {blade_point_left}, {blade_point_middle}, {blade_point_right}, {blade_base_right}, {guard_upper_right}, {guard_bottom_right}, {grip_upper_right}, {grip_bottom_right}"
 
 
+def resize(multiplicationFactor, sizeList):
+    for size in sizeList:
+        if isinstance(size, Size):
+            print("isResizignsndsf")
+            size.multiply(multiplicationFactor)
+
+
 def main():
     fontSize, svgSize, roleIconSize = set_base_sizes()
+    sizeList = [fontSize, svgSize, roleIconSize]
 
     scriptName, csvPath = validate_cli_arguments()
     viewers = processCSV(scriptName, csvPath)
 
     multiplicationFactor = 2
-
-    fontSize.multiply(multiplicationFactor)
-    svgSize.multiply(multiplicationFactor)
-    roleIconSize.multiply(multiplicationFactor)
+    resize(multiplicationFactor, sizeList)
 
     font = Font("Consolas", fontSize)
 
-    # set size of SVG - yet to make this function.
     sorted_viewers, svgSize = set_viewer_coordinates(
         viewers, svgSize, fontSize, roleIconSize
     )
