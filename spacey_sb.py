@@ -205,7 +205,6 @@ def processCSV(scriptName, csvPath):
         raise SystemExit(USAGE)
 
     except Exception as exception:
-        print("IN METHOD")
         print(exception.__class__)
         print(exception)
         print(
