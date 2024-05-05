@@ -1,0 +1,333 @@
+<svg width="1600" height="554" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 1600 544">
+  <defs>
+    <pattern id="vip_badge" x="0" y="0" width="24" height="20" patternUnits="objectBoundingBox">
+      <polygon fill="#fb0493" points="0 5.2, 4.5 0, 19.5 0, 24 5.2, 12.0 20" />
+    </pattern>
+    <pattern id="mod_badge" x="0" y="0" width="24" height="20" patternUnits="objectBoundingBox">
+      <polygon fill="#14cb04" points="0 17.5, 3.0 13.75, 0 11.25, 3.0 8.75, 6.6000000000000005 11.0, 18.0 0, 24 0, 24 5.0, 10.5 13.75, 15.0 17.5, 12.0 20, 6.6000000000000005 17.5, 3.0 20" />
+    </pattern>
+  </defs>
+  <rect x="0" y="-20" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="24" y="0" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="104" y="-20" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="128" y="0" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="208" y="-20" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="232" y="0" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="372" y="-20" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="396" y="0" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="556" y="0" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="656" y="-20" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="680" y="0" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="820" y="-20" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="844" y="0" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="924" y="-20" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="948" y="0" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="1088" y="0" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="1168" y="0" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="1268" y="-20" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1292" y="0" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1372" y="-20" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1396" y="0" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <text x="1476" y="0" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="0" y="14" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="24" y="34" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="164" y="14" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="188" y="34" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <rect x="348" y="14" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="372" y="34" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="512" y="14" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="536" y="34" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="616" y="14" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="640" y="34" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="780" y="34" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="860" y="34" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="960" y="14" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="984" y="34" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1064" y="14" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1088" y="34" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="1168" y="14" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1192" y="34" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1332" y="14" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1356" y="34" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1516" y="34" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="0" y="68" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="100" y="48" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="124" y="68" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="264" y="48" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="288" y="68" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="368" y="48" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="392" y="68" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="532" y="68" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="632" y="48" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="656" y="68" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="736" y="48" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="760" y="68" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="840" y="48" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="864" y="68" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1004" y="48" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1028" y="68" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1188" y="68" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="1288" y="48" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1312" y="68" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="1452" y="48" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1476" y="68" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="0" y="82" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="24" y="102" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="164" y="102" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="244" y="102" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="344" y="82" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="368" y="102" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="448" y="82" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="472" y="102" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="552" y="82" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="576" y="102" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="716" y="82" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="740" y="102" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="900" y="102" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="1000" y="82" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1024" y="102" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="1164" y="82" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1188" y="102" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="1268" y="82" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1292" y="102" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="1432" y="102" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="1512" y="102" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="0" y="136" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="100" y="116" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="124" y="136" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="204" y="116" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="228" y="136" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="308" y="116" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="332" y="136" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="472" y="116" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="496" y="136" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="656" y="136" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="756" y="116" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="780" y="136" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="920" y="116" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="944" y="136" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="1024" y="116" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1048" y="136" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="1188" y="136" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="1288" y="116" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1312" y="136" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1392" y="116" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1416" y="136" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <text x="1496" y="136" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="0" y="150" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="24" y="170" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="164" y="150" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="188" y="170" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <rect x="348" y="150" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="372" y="170" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="512" y="150" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="536" y="170" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="616" y="150" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="640" y="170" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="780" y="170" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="860" y="170" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="960" y="150" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="984" y="170" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1064" y="150" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1088" y="170" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="1168" y="150" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1192" y="170" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1332" y="150" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1356" y="170" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1516" y="170" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="0" y="204" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="100" y="184" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="124" y="204" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="264" y="184" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="288" y="204" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="368" y="184" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="392" y="204" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="532" y="204" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="632" y="184" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="656" y="204" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="736" y="184" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="760" y="204" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="840" y="184" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="864" y="204" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1004" y="184" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1028" y="204" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1188" y="204" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="1288" y="184" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1312" y="204" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="1452" y="184" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1476" y="204" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="0" y="218" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="24" y="238" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="164" y="238" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="244" y="238" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="344" y="218" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="368" y="238" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="448" y="218" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="472" y="238" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="552" y="218" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="576" y="238" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="716" y="218" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="740" y="238" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="900" y="238" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="1000" y="218" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1024" y="238" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="1164" y="218" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1188" y="238" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="1268" y="218" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1292" y="238" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="1432" y="238" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="1512" y="238" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="0" y="272" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="100" y="252" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="124" y="272" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="204" y="252" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="228" y="272" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="308" y="252" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="332" y="272" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="472" y="252" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="496" y="272" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="656" y="272" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="756" y="252" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="780" y="272" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="920" y="252" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="944" y="272" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="1024" y="252" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1048" y="272" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="1188" y="272" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="1288" y="252" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1312" y="272" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1392" y="252" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1416" y="272" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <text x="1496" y="272" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="0" y="286" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="24" y="306" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="164" y="286" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="188" y="306" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <rect x="348" y="286" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="372" y="306" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="512" y="286" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="536" y="306" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="616" y="286" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="640" y="306" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="780" y="306" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="860" y="306" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="960" y="286" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="984" y="306" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1064" y="286" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1088" y="306" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="1168" y="286" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1192" y="306" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1332" y="286" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1356" y="306" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1516" y="306" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="0" y="340" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="100" y="320" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="124" y="340" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="264" y="320" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="288" y="340" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="368" y="320" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="392" y="340" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="532" y="340" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="632" y="320" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="656" y="340" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="736" y="320" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="760" y="340" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="840" y="320" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="864" y="340" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1004" y="320" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1028" y="340" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1188" y="340" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="1288" y="320" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1312" y="340" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="1452" y="320" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1476" y="340" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="0" y="354" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="24" y="374" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="164" y="374" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="244" y="374" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="344" y="354" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="368" y="374" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="448" y="354" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="472" y="374" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="552" y="354" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="576" y="374" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="716" y="354" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="740" y="374" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="900" y="374" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="1000" y="354" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1024" y="374" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="1164" y="354" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1188" y="374" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="1268" y="354" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1292" y="374" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="1432" y="374" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="1512" y="374" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="0" y="408" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="100" y="388" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="124" y="408" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="204" y="388" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="228" y="408" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="308" y="388" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="332" y="408" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="472" y="388" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="496" y="408" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="656" y="408" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="756" y="388" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="780" y="408" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="920" y="388" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="944" y="408" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="1024" y="388" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1048" y="408" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="1188" y="408" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="1288" y="388" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1312" y="408" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1392" y="388" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1416" y="408" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <text x="1496" y="408" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="0" y="422" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="24" y="442" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="164" y="422" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="188" y="442" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <rect x="348" y="422" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="372" y="442" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="512" y="422" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="536" y="442" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="616" y="422" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="640" y="442" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="780" y="442" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="860" y="442" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="960" y="422" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="984" y="442" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="1064" y="422" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="1088" y="442" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="1168" y="422" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1192" y="442" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1332" y="422" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1356" y="442" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1516" y="442" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="0" y="476" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="100" y="456" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="124" y="476" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="264" y="456" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="288" y="476" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="368" y="456" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="392" y="476" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="532" y="476" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+  <rect x="632" y="456" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="656" y="476" fill="Blue" style="font-family:Consolas; font-size:32px">JACK</text>
+  <rect x="736" y="456" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="760" y="476" fill="Yellow" style="font-family:Consolas; font-size:32px">HANK</text>
+  <rect x="840" y="456" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="864" y="476" fill="Pink" style="font-family:Consolas; font-size:32px">MAJORIE</text>
+  <rect x="1004" y="456" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1028" y="476" fill="Blue" style="font-family:Consolas; font-size:32px">VERONICA</text>
+  <text x="1188" y="476" fill="Green" style="font-family:Consolas; font-size:32px">JENNY</text>
+  <rect x="1288" y="456" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1312" y="476" fill="Purple" style="font-family:Consolas; font-size:32px">ALFREDO</text>
+  <rect x="1452" y="456" width="24" height="20" fill="url(#vip_badge)" />
+  <text x="1476" y="476" fill="Black" style="font-family:Consolas; font-size:32px">BIGL</text>
+  <rect x="0" y="490" width="24" height="20" fill="url(#mod_badge)" />
+  <text x="24" y="510" fill="Green" style="font-family:Consolas; font-size:32px">ABRAHAM</text>
+  <text x="164" y="510" fill="Pink" style="font-family:Consolas; font-size:32px">WALT</text>
+  <text x="244" y="510" fill="Pink" style="font-family:Consolas; font-size:32px">KRISS</text>
+</svg>

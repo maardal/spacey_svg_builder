@@ -1,4 +1,8 @@
 #Project specific
 *.svg
+!example/example.svg
+
 *.csv
+!example/example.csv
+
 *.txt
