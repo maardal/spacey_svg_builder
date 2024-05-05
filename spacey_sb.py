@@ -14,11 +14,13 @@
 # If no color set, the color of the name is defaulted to black.
 # Colors can be given as a name or as a HEX code. If given as a name, they must be a amongst the
 # 140 supported by most browsers. If not recognized, the color is defaulted to black.
-# Nickname takes presedence over username if added.
+# Nickname takes presedence over username if added as anything than a empty string.
 # Roles supported are mod and vip. Usernames with mod get the mod sword beside their name,
 # while usernames with vip get the vip diamond.
 #
-# The font family has to be monospaced, i.e. where alle characters have the same length.
+# This script is to be used with monospaced fonts, i.e. where alle characters have the same width.
+# Using non-monospaced fonts will make create uneven spacing between characters, as script does
+# not take into account for letters of differing width.
 # Defaut font family is "Consolas".
 #
 # Script saves the files with a timestamp on the format yyyy-mm-dd-hr-mm-ss.
@@ -31,10 +33,6 @@ from pathlib import Path
 from datetime import datetime
 from xml.etree import ElementTree as et
 
-# Helper classes.
-
-## Holds the data needed for the visual representation of a viewer's name in the SVG.
-
 
 class Viewer:
     def __init__(self, displayName, color, role):
@@ -43,9 +41,6 @@ class Viewer:
         self.role = role
         self.x = 0
         self.y = 0
-
-
-## Class to more easily increase the size of the produced SVG.
 
 
 class Size(ABC):
@@ -117,24 +112,6 @@ def set_base_sizes():
     return fontSize, svgSize, roleIconSize
 
 
-def has_command_line_argument(sysArgs):
-    return len(sysArgs) > 1
-
-
-def is_help_command(argument):
-    return str(argument).lower() == "--help" or str(argument).lower() == "-h"
-
-
-def print_help():
-    print()
-    print("\nCreates a list of Twitch usernames on a SVG format, based on CSV file.")
-    print(
-        "See https://github.com/maardal/spacey_svg_builder for requirements for CSV file."
-    )
-    print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
-    print()
-
-
 def validate_cli_arguments():
 
     print("validating cli arguments")
@@ -170,10 +147,28 @@ def validate_cli_arguments():
     return scriptName, str(filePath)
 
 
+def has_command_line_argument(sysArgs):
+    return len(sysArgs) > 1
+
+
+def is_help_command(argument):
+    return str(argument).lower() == "--help" or str(argument).lower() == "-h"
+
+
+def print_help():
+    print()
+    print("\nCreates a list of Twitch usernames on a SVG format, based on CSV file.")
+    print(
+        "See https://github.com/maardal/spacey_svg_builder for requirements for CSV file."
+    )
+    print("\noptional arguments:\n\t-h, --help\t\tshow this message and exit.")
+    print()
+
+
 def processCSV(scriptName, csvPath):
     print(f"{scriptName} processing CSV...")
     viewers = []
-    USAGE = f"Usage: python {scriptName} [--help] | <path_to_csv_file>"  # Move to global scope? #make command that returns the string?
+    USAGE = f"Usage: python {scriptName} [--help] | <path_to_csv_file>"
 
     try:
         with open(csvPath, newline="") as csvfile:
@@ -217,8 +212,12 @@ def processCSV(scriptName, csvPath):
     return viewers
 
 
-# Calculate coordinates for names. Will not let names overflow the width of the SVG.
-# Also sorts list name, so spaces at the end of a line will be filled by the first possible name that is short enough.
+def resize(multiplicationFactor, sizeList):
+    for size in sizeList:
+        if isinstance(size, Size):
+            size.multiply(multiplicationFactor)
+
+
 def set_viewer_coordinates(viewers, svgSize, fontSize, roleIconSize):
 
     print("Calculating coordinates for names...")
@@ -230,11 +229,11 @@ def set_viewer_coordinates(viewers, svgSize, fontSize, roleIconSize):
     svgHeight = 0  # svgHeight is determined by the amount of names.
 
     while len(viewers) > 0:
-        for j in range(0, len(viewers)):
+        for viewer in range(0, len(viewers)):
             if temp_max_x == 0:
                 break
 
-            temp_viewer = viewers[j]
+            temp_viewer = viewers[viewer]
             calulatedPixelLengthName = math.ceil(
                 len(temp_viewer.displayName) * fontSize.charLength
             )
@@ -247,7 +246,7 @@ def set_viewer_coordinates(viewers, svgSize, fontSize, roleIconSize):
                 temp_x = temp_x + calulatedPixelLengthName
 
                 sorted_list.append(temp_viewer)
-                temp_remove_array.append(j)
+                temp_remove_array.append(viewer)
 
                 temp_max_x = temp_max_x - calulatedPixelLengthName
 
@@ -268,7 +267,6 @@ def set_viewer_coordinates(viewers, svgSize, fontSize, roleIconSize):
 
 
 def build_svg(viewer_list, font, svgSize, roleIconSize):
-    # Build SVG.
     print("Building svg...")
 
     heightBuffer = 10
@@ -287,7 +285,6 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
     iconWidth = roleIconSize.width
     iconHeight = roleIconSize.height
 
-    ## vip_badge_coordinates - a diamond.
     vip_pattern_points = create_vip_pattern_points_string(iconWidth, iconHeight)
 
     vip_pattern_definition = et.SubElement(
@@ -307,7 +304,6 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
         points=vip_pattern_points,
     )
 
-    ## mod_badge_coordinates - a sword.
     mod_pattern_points = create_mod_pattern_points_string(iconWidth, iconHeight)
 
     mod_pattern_definition = et.SubElement(
@@ -329,7 +325,6 @@ def build_svg(viewer_list, font, svgSize, roleIconSize):
 
     svg.append(defs)
 
-    ## Place names in SVG based on coordinates.
 
     for viewer in viewer_list:
         viewer_x_position = viewer.x
@@ -407,13 +402,6 @@ def create_mod_pattern_points_string(iconWidth, iconHeight):
     grip_bottom_right = f"{iconWidth * 0.125} {iconHeight}"
 
     return f"{grip_bottom_left}, {grip_upper_left}, {guard_bottom_left}, {guard_upper_left}, {blade_base_left}, {blade_point_left}, {blade_point_middle}, {blade_point_right}, {blade_base_right}, {guard_upper_right}, {guard_bottom_right}, {grip_upper_right}, {grip_bottom_right}"
-
-
-def resize(multiplicationFactor, sizeList):
-    for size in sizeList:
-        if isinstance(size, Size):
-            print("isResizignsndsf")
-            size.multiply(multiplicationFactor)
 
 
 def main():
