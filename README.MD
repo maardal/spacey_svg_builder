@@ -28,7 +28,7 @@ Can't distinguish header names from content, so please remove headers from the C
 
 - Username can be any string
 - (Optional) Color can be Any hex code, or named colors supported by browsers. Defaults to black.
-- (Optional) Nickname can be any string. Takes precedence over username if supplioed.
+- (Optional) Nickname can be any string. Takes precedence over username if supplied as anything else than a empty string.
 - (Optional) Twitch role can be either "mod" or "vip".
 
 ## Output
@@ -61,5 +61,6 @@ Possible improvements for the script:
   - other monospaced fonts
   - size of svg
   - alignment of names-> left, centre, rigth. Default behaviour is left aligned.
-- Add logging/error output, so script could be used in a system.
-- make a guided console user experience for non-coders
+- add logging/error output, so script could be used in a system.
+- make a guided console user experience for non-coders.
+- add a t-shirt "frame" to the svg, to resemble the t-shirt that inspired the script.
